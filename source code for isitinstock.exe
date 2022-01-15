@@ -1,0 +1,296 @@
+import tkinter as tk
+from tkinter import filedialog, Text, mainloop, messagebox
+import os
+import requests
+from bs4 import BeautifulSoup
+import time
+import sys
+import re
+
+# This program creates a pop up window in Tkinter for you to enter your email along with a link to a product page on Amazon, Best Buy, or Walmart. After submitting the information, an automatic tab will open that will refresh itself every 20 seconds, checking to see if the product is in stock. When the product goes into stock, the user will be notified by email.
+# The Good_Link variable may be unnecessary.
+Good_Link = True
+def StartWindow():
+# Creates Pop Up Window -------------------------------------------
+    root = tk.Tk()
+
+
+    canvas = tk.Canvas(root, height=700, width=700, bg="#260D42")
+    canvas.pack()
+
+    frame = tk.Frame(root, bg="white")
+    frame.place(relwidth=0.8, relheight=0.8, relx=0.1, rely=0.1)
+
+    label2 = tk.Label(root, text='Enter Link To Product:')
+    label2.config(font=('helvetica', 15))
+    canvas.create_window(320, 100, window=label2)
+
+    label3 = tk.Label(root, text='Enter Email Address:')
+    label3.config(font=('helvetica', 15))
+    canvas.create_window(320, 360, window=label3)
+
+
+    label4 = tk.Label(root, text='Note: You can only enter links \n to track products from Amazon, Walmart, and Best Buy.')
+    label4.config(font=('helvetica', 15))
+    canvas.create_window(340, 240, window=label4)
+
+    entry1 = tk.Entry (root, width=64)
+    canvas.create_window(320, 140, window=entry1)
+
+    entry2 = tk.Entry (root, width=64)
+    canvas.create_window(320, 400, window=entry2)
+
+    product_link = ""
+    user_email = ""
+    URL_validity = 0
+    
+    def getEntries():
+        global product_link
+        global user_email
+        global URL_validity
+ 
+        
+
+        product_link = entry1.get()
+        user_email = entry2.get()
+        try:
+            response = requests.get(product_link)
+            
+            
+        except:
+            messagebox.showinfo("Invalid Link", "Please enter a valid URL.")
+            
+
+                
+            
+
+       
+        return user_email
+        return product_link
+        return URL_validity
+        
+
+    # Takes and Stores Input  ------------------------------------------------------------------------
+    SubmitLink = tk.Button(root, text="Confirm Entries", command=getEntries, padx=10, pady=5, 
+    fg="white", bg="#263D42")
+
+    DoneButton = tk.Button(root, text="Done", command=root.destroy, padx=10, pady=5,
+    fg="white", bg="#263D42")
+
+
+    SubmitLink.pack()
+    DoneButton.pack()
+
+
+   
+    def on_closing():
+        if messagebox.askokcancel("Quit", "Do you want to quit?"):
+            root.destroy()
+            sys.exit()
+
+
+    root.protocol("WM_DELETE_WINDOW", on_closing)
+
+
+
+    root.mainloop()  
+
+
+
+def resource_path(relative_path):
+    try:
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.dirname(__file__)
+    return os.path.join(base_path, relative_path)
+
+
+StartWindow()
+
+# Goes to the product page and gets the product name + availibility-------------------------------------------------------------
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+
+
+
+def get_Amazon_availibility():
+    opts = Options()
+    # driver = webdriver.Chrome(options=opts)  
+    driver = webdriver.Chrome(resource_path('./driver/chromedriver.exe'))  
+    driver.get(product_link)
+    time.sleep(5)
+    html = driver.page_source
+
+    
+    soup = BeautifulSoup(html,'html.parser')
+    title = soup.find(id="buy-now-button")
+    print(title)
+    cart = soup.find(id="add-to-cart-button")
+    print(cart)
+    cart_ubb = soup.find(id="add-to-cart-button-ubb")
+    print(cart_ubb)
+    
+    
+    global productName
+    productName = soup.find(id="productTitle").get_text()
+    productName = productName.strip()
+    print(productName)
+
+
+    availibility = False
+    if "buy-now-button" in str(title):
+        availibility = True
+    elif "add-to-cart-button" in str(cart):
+        availibility = True
+    elif "add-to-cart-button-ubb" in str(cart_ubb):
+        availibility = True
+    else:
+        availibility = False
+        print(productName +' not available. Checking again in 20 seconds...')
+        time.sleep(20)
+        driver.refresh()
+    return availibility
+
+
+
+def get_BestBuy_availibility():
+
+    opts = Options()
+    driver = webdriver.Chrome(resource_path('./driver/chromedriver.exe'))  
+    driver.get(product_link)
+    time.sleep(5)
+    html = driver.page_source   
+    soup = BeautifulSoup(html,'html.parser')
+    availibility = False
+
+    global productName
+    productName = soup.find("h1", {"class": "heading-5 v-fw-regular"}).get_text()
+    productName = productName.strip()
+    print(productName)
+
+    try:
+        title = soup.find("button", {"data-button-state": "ADD_TO_CART"}).get_text()
+        print(title)
+        availibility = True
+    except:
+        availibility = False
+        print(productName +' not available. Checking again in 20 seconds...')
+        time.sleep(20)
+        driver.refresh()
+         
+    return availibility
+
+def get_Walmart_availibility():
+    availibility = False
+
+    string = product_link
+    m = string.split('https://www.walmart.com/ip/')[1].split('/')[0]
+    global productName
+    productName = m
+    print(productName)
+    root2 = tk.Tk()
+
+
+    canvas2 = tk.Canvas(root2, height=700, width=700, bg="#263D42")
+    canvas2.pack()
+
+    frame2 = tk.Frame(root2, bg="white")
+    frame2.place(relwidth=0.8, relheight=0.8, relx=0.1, rely=0.1)
+
+    label22 = tk.Label(root2, text='Tracking the Availibility of Walmart Products \n does not require an automated pop-up window. \n You will be notified through e-mail when your \n Walmart product goes into stock. \n\n Click "Agree" to proceed.')
+    label22.config(font=('helvetica', 15))
+    canvas2.create_window(340, 300, window=label22)
+
+    AgreeButton = tk.Button(root2, text="Agree", command=root2.destroy, padx=20, pady=20,
+    fg="white", bg="#263D42")
+    AgreeButton.pack()
+    root2.mainloop()
+
+    while availibility == False:
+        
+        header = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36'}
+        html = requests.get(product_link, headers=header)
+        text = html.text
+        
+
+
+        position = (int(text.find('"availability":"https://schema.org/InStock"')))
+        print(str(position))
+        if position != -1:
+            availibility = True
+        elif position == -1:
+            availibility = False
+            print(productName +' not available. Checking again in 20 seconds...')
+            time.sleep(20)
+        
+    
+    return availibilityt
+    
+        
+
+# Sends the Email if it's available to order -----------------------------------
+import smtplib
+def send_email():
+    
+    subject = 'In Stock: ' + str(productName)
+    body = 'Your product is now in stock! Check:' + product_link
+    msg = f"Subject: {subject}\n\n{body}"
+    #msg = 'Subject: Appointment: ' + product_link
+    fromaddr = 'isitinstockapp@gmail.com'
+    print(user_email)
+    toaddrs = [str(user_email)]
+    server = smtplib.SMTP('smtp.gmail.com', 587) 
+    server.starttls()
+    # add account login name and password,
+    server.login("isitinstockapp@gmail.com", "lwclkdinwmymvbmc")
+    # Print the email's contents
+    print('From: ' + fromaddr)
+    print('To: ' + str(toaddrs))
+    print('Message: ' + msg)
+    # send the email
+    server.sendmail(fromaddr, toaddrs, msg)
+    # disconnect from the server
+    server.quit()
+    
+     
+ 
+# If it's not in stock, the program checks again.
+if "amazon" in product_link:
+    Good_Link = True
+    availibility = get_Amazon_availibility()
+    print(availibility)
+    while availibility == False:
+        get_Amazon_availibility()
+        time.sleep(5)
+    if availibility == True:
+        send_email()
+        print("Email sent.")
+
+elif "bestbuy" in product_link:
+    Good_Link = True
+    availibility = get_BestBuy_availibility()
+    print(availibility)
+    while availibility == False:
+        get_BestBuy_availibility()
+        time.sleep(5)
+    if availibility == True:
+        send_email()
+        print("Email sent.")
+
+elif "walmart" in product_link:
+    Good_Link = True
+    availibility = get_Walmart_availibility()
+    print(availibility)
+    while availibility == False:
+        get_Walmart_availibility()
+        time.sleep(5)
+    if availibility == True:
+        send_email()
+        print("Email sent.")
+    
+else:
+    
+    StartWindow()
+    Good_Link = False
+    
+
