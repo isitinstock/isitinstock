@@ -8,3 +8,7 @@ body {
 .introtext {
     font-size: large;
   }
+
+.header {
+    margin-top: 25px
+}
