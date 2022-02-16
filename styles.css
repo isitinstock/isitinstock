@@ -6,13 +6,18 @@ body {
 }
 
 .introtext {
-    font-size: large;
+    font-size: 30px;
   }
 
+.linktext {
+    outline-color: black;
+    outline-style: groove;
+}
 .sourcecodetext {
     position: absolute;
     bottom: 25px;
     left: 25px;
+    font-size: 30px;
 }
 .header {
     margin-top: 25px
