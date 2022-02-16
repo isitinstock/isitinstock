@@ -6,7 +6,7 @@ body {
 }
 
 .introtext {
-    font-size: 30px;
+    font-size: 40px;
   }
 
 .linktext {
@@ -29,4 +29,13 @@ body {
   left: 25px;
   width: 250px;
   height: 225px;
+}
+
+.aboutme {
+    padding: 15px;
+    position: absolute;
+    top: 500px;
+    left: 25px:
+    
+  
 }
