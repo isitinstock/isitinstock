@@ -1,18 +1,152 @@
+<!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
+<title>Is It In Stock Website</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
+.w3-bar,h1,button {font-family: "Montserrat", sans-serif}
+.fa-anchor,.fa-coffee {font-size:200px}
+</style>
 <body>
-    <h1 class="header"> Is It In Stock?</h1>
-    <p class="introtext">A free-to-use, fast, and reliable alert system for when an online product you want goes back into stock.</p>
-    <p class="introtext">Works with Amazon, Walmart, and Bestbuy.</p>
-     <a href="isitinstock.exe"/ class="introtext linktext"> Download for Windows! (15.0 MB)</a> <p> SHA256 Hash: b0ad29a71ae0796c0b97974b148b40d02adaec432e4b5f81dd2b3977293f4bc1 </p>
-    <img src="logo.jpg" alt="Is It In Stock? Logo" class="logo">
-    <a href="https://github.com/isitinstock/isitinstock/blob/main/source%20code%20for%20isitinstock.exe" class="sourcecodetext"> Link To Source Code (Github) </a>
-    <p class="aboutme"> About Me: Welcome to my site! I am a student that loves a challenge and is frustrated when items are out of stock online, hence the creation of this stock-alert tool. Enjoy!</p> 
+
+<!-- Navbar -->
+<div class="w3-top">
+  <div class="w3-bar w3-pink w3-card w3-left-align w3-large">
+    <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-pink" href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+    <a href="#" class="w3-bar-item w3-button w3-padding-large w3-white">Home</a>
+    <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Link 1</a>
+    <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Link 2</a>
+    <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Link 3</a>
+    <a href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Link 4</a>
+  </div>
+
+  <!-- Navbar on small screens -->
+  <div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium w3-large">
+    <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 1</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 2</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 3</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 4</a>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="w3-container w3-pink w3-center" style="padding:128px 16px">
+  <h1 class="w3-margin w3-jumbo">Is It In Stock?</h1>
+  <img src="https://isitinstock.github.io/isitinstock/logo.jpg" alt="pic" width="20%">
+  <p class="w3-xlarge">A free-to-use, fast, and reliable alert system for when an online product you want goes back into stock. </p>
+
+<p class="w3-large"> Works with Amazon, Walmart, and Bestbuy.</p>
+  <button class="w3-button w3-black w3-padding-large w3-large w3-margin-top">Download for Windows (15.0 MB)</button>
+</header>
+
+<!-- First Grid -->
+<div class="w3-row-padding w3-padding-64 w3-container">
+  <div class="w3-content">
+ 
+    <div class="w3-twothird">
+      <h1 style="font-weight: bold;">How Does It Work?</h1>
+      <h1 style="position:relative;bottom:70px;left:750px;"> Video Tutorial </h1>
+  <div style="position:relative;bottom:70px;">    
+      <h5 class="w3-padding-32">Want to buy a product online but aren't sure when it's going back into stock? Get instant email alerts when the product is available by following the steps below:</h5>
+      <h6 class="w3-large"> 1) Paste the link to the product's page </h6>
+      <h6 class="w3-large"> 2) Enter and verify your email address (to recieve alerts) </h6>
+      <h6 class="w3-large"> 3) Turn on email notifications on your mobile device </h6>
+	  <h6 class="w3-large"> 4) We will alert you when the product goes back into stock with an email that will take you straight to the product page to order right away!  </h6>
+	</div>
+    </div>
+
+    <div class="w3-third w3-center">
+       <iframe src="https://drive.google.com/file/d/1txy7asiHTNxR5frjXYYOk6RbCj20CV65/preview" width="400" height="300" allow="autoplay" style="border:5px solid black;position:relative;top:70px;left:30px;" ></iframe>
+    </div>
+  </div>
+</div>
+
+<!-- Second Grid -->
+<div class="w3-row-padding w3-light-grey w3-padding-64 w3-container">
+  <div class="w3-content">
+  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHOKB8snSSRG8DrTe_EL82Cvk3sNv3q2BhlziNJoG80m81sXN9-e2ztQQ9EqTP6kowbv0&usqp=CAU" width=30% style="border:5px solid black;position:relative;top:100px;">
+  
+    <div class="w3-third w3-center">
+      
+    </div>
+
+    <div class="w3-twothird">
+      <h1 style="font-weight:bold;">Out-of-Stock Items: Stats & Facts</h1>
+      <ul>
+      <dl>
+ <li> <dt class="w3-xlarge">2.14 billion online shoppers in 2021 </dt>
+  <dd class="w3-padding-32 w3-xlarge">→ Up 900 million from 2020 </dd>
+  <li> <dt class="w3-xlarge">~1 in 50 product pages say “Out of stock.” </dt> </li>
+  <dd class="w3-padding-32 w3-xlarge">→ Was 1 in 140 in Jan 2020 </dd>
+  <li> <dt class="w3-xlarge">Supply Chain issues are soaring!</dt> </li>
+  <dd class="w3-xlarge"> → Shipping container prices are doubling</dd>
+  <dd class="w3-xlarge"> → Low warehouse capacity</dd>
+  <dd class="w3-xlarge"> → Truck driver shortage</dd>
+  <dd class="w3-xlarge"> → Railroad issues</dd>
+  <dd class="w3-xlarge"> → High cost of air cargo</dd>
+</dl>
+</ul>
+<a href="https://www.cnn.com/2021/11/09/business/out-of-stock-online-october/index.html"> Source 1 </a>
+<a style="position:relative;right:60px;top:30px;" href="https://www.oberlo.com/statistics/how-many-people-shop-online"> Source 2 </a>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- Third Grid -->
+<div class="w3-row-padding w3-padding-64 w3-container">
+  <div class="w3-content">
+    <div class="w3-third w3-center">
+     
+    </div>
+
+    <div class="w3-twothird">
+      <h1 style="font-weight:bold;">About Me</h1>
+      
+      <h5 class="w3-xlarge"> Welcome to my site!</h5>
+      <h5 class="w3-large"> My name is Vignesh and I am a student that loves a challenge and is frustrated when items are out of stock online. When products go back into stock, especially rare, low supply ones, you won't immediately know, and you might miss out on the chance to order it before it runs out again. So, I created this application to alert you immediately so that you'll never miss out on a restock!</h5>
+      
+      <img style="border:5px solid black;position:relative;left:700px;bottom:250px;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQm2xwmXA30O0RMJuturWCgjsMvZDlg7Jzim93BIJ9MgL1PWJMlFwGxCCFpOQUpx5EflMg&usqp=CAU">
+      <h5 style="position:relative;bottom:200px;"class="w3-large"> If you have any questions or suggestions, contact me at isitinstockapp@gmail.com.</h5>
+
+    </div>
+  </div>
+</div>
+
+<div class="w3-container w3-black w3-center w3-opacity w3-padding-64">
+    <h1 class="w3-margin w3-xlarge"></h1>
+</div>
+
+<!-- Footer -->
+<footer class="w3-container w3-padding-64 w3-center w3-opacity">  
+  <div class="w3-xlarge w3-padding-32">
+    <i class="fa fa-facebook-official w3-hover-opacity"></i>
+    <i class="fa fa-instagram w3-hover-opacity"></i>
+    <i class="fa fa-snapchat w3-hover-opacity"></i>
+    <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+    <i class="fa fa-twitter w3-hover-opacity"></i>
+    <i class="fa fa-linkedin w3-hover-opacity"></i>
+ </div>
+ 
+</footer>
+
+<script>
+// Used to toggle the menu on small screens when clicking on the menu button
+function myFunction() {
+  var x = document.getElementById("navDemo");
+  if (x.className.indexOf("w3-show") == -1) {
+    x.className += " w3-show";
+  } else { 
+    x.className = x.className.replace(" w3-show", "");
+  }
+}
+</script>
+
 </body>
 </html>
